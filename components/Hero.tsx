@@ -47,7 +47,7 @@ const Hero = () => {
               </span>
             </div>
             <div className="h-12 w-px bg-white/30 hidden md:block"></div>
-            <div className="flex flex-col items-center text-white hidden md:flex">
+            <div className="flex flex-col items-center text-white md:flex">
               <span className="text-3xl font-semibold">24/7</span>
               <span className="text-sm uppercase tracking-wider mt-1">
                 Support
