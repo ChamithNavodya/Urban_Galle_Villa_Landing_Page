@@ -46,7 +46,7 @@ const GallerySection = () => {
                   <CardContent className="p-0">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                       <Image
-                        src={image.src || "/placeholder.svg"}
+                        src={image.src}
                         alt={image.alt}
                         fill
                         className="object-cover"
