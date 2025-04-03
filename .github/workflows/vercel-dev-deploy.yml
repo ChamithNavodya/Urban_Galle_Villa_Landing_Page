@@ -20,9 +20,9 @@ jobs:
       - run: npm install
       
       - name: Install Vercel CLI
-        run: npm install -g vercel@latest
+        run: npm install -g vercel@28.16.11  # Pinned to stable version
         
-      - name: Pull environment variables
+      - name: Pull Vercel project settings
         run: |
           vercel pull --yes --environment=development \
           --token=${{ secrets.VERCEL_TOKEN }} \
@@ -31,13 +31,13 @@ jobs:
       - name: Clean previous builds
         run: rm -rf .vercel || true
           
-      - name: Build project (Preview)
+      - name: Build project
         run: |
           vercel build --prod=false \
           --token=${{ secrets.VERCEL_TOKEN }} \
           --scope=${{ secrets.VERCEL_SCOPE }}
           
-      - name: Deploy Preview
+      - name: Deploy preview
         run: |
           vercel deploy --prebuilt --prod=false \
           --token=${{ secrets.VERCEL_TOKEN }} \
