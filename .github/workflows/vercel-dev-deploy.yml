@@ -1,44 +1,19 @@
 name: Vercel Development Deploy
 
 on:
-  pull_request:
-    branches: [development]
   push:
     branches: [development]
 
 jobs:
-  deploy-preview:
+  Deploy-Preview:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          
-      - run: npm install
-      
+      - uses: actions/checkout@v2
       - name: Install Vercel CLI
-        run: npm install -g vercel@28.16.11  # Pinned to stable version
-        
-      - name: Pull Vercel project settings
-        run: |
-          vercel pull --yes --environment=preview \
-          --token=${{ secrets.VERCEL_TOKEN }} \
-          --scope=${{ secrets.VERCEL_SCOPE }}
-          
-      - name: Clean previous builds
-        run: rm -rf .vercel || true
-          
-      - name: Build project
-        run: |
-          vercel build --prod=false \
-          --token=${{ secrets.VERCEL_TOKEN }} \
-          --scope=${{ secrets.VERCEL_SCOPE }}
-          
-      - name: Deploy preview
-        run: |
-          vercel deploy --prebuilt --prod=false \
-          --token=${{ secrets.VERCEL_TOKEN }} \
-          --scope=${{ secrets.VERCEL_SCOPE }}
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
