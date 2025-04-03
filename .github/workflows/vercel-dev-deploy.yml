@@ -3,7 +3,6 @@ name: Vercel Development Deploy
 on:
   pull_request:
     branches: [development]
-    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [development]
 
@@ -11,36 +10,31 @@ jobs:
   deploy-preview:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
+      - uses: actions/checkout@v3
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
           
-      - name: Install dependencies
-        run: npm install
-        
+      - run: npm install
+      
       - name: Install Vercel CLI
-        run: npm install -g vercel@latest
+        run: npm install -g vercel@28.16.11  # Pinned to stable version
         
-      - name: Pull Vercel environment variables
+      - name: Create environment file
         run: |
-          vercel pull --yes --environment=development \
-          --token=${{ secrets.VERCEL_TOKEN }} \
-          --scope=${{ secrets.VERCEL_SCOPE }}
+          echo "NEXT_PUBLIC_ENV=development" > .env
+          echo "API_URL=https://dev-api.example.com" >> .env
           
-      - name: Build with development config
+      - name: Build development version
         run: |
           vercel build --prod=false \
           --token=${{ secrets.VERCEL_TOKEN }} \
-          --scope=${{ secrets.VERCEL_SCOPE }} \
-          --build-env NEXT_PUBLIC_ENV=development
+          --scope=${{ secrets.VERCEL_SCOPE }}
           
-      - name: Create preview deployment
+      - name: Deploy preview
         run: |
           vercel deploy --prebuilt \
           --token=${{ secrets.VERCEL_TOKEN }} \
-          --scope=${{ secrets.VERCEL_SCOPE }} \
-          --env NODE_ENV=development
+          --scope=${{ secrets.VERCEL_SCOPE }}
