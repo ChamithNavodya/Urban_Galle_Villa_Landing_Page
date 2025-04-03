@@ -36,7 +36,6 @@ jobs:
           vercel build --prod=false \
           --token=${{ secrets.VERCEL_TOKEN }} \
           --scope=${{ secrets.VERCEL_SCOPE }} \
-          --env NODE_ENV=development \
           --build-env NEXT_PUBLIC_ENV=development
           
       - name: Create preview deployment
