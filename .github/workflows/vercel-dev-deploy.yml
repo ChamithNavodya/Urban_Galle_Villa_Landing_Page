@@ -22,20 +22,23 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
         
-      - name: Pull Vercel environment
+      - name: Pull environment variables
         run: |
           vercel pull --yes --environment=development \
           --token=${{ secrets.VERCEL_TOKEN }} \
           --scope=${{ secrets.VERCEL_SCOPE }}
           
-      - name: Build project
+      - name: Clean previous builds
+        run: rm -rf .vercel || true
+          
+      - name: Build project (Preview)
         run: |
           vercel build --prod=false \
           --token=${{ secrets.VERCEL_TOKEN }} \
           --scope=${{ secrets.VERCEL_SCOPE }}
           
-      - name: Create deployment
+      - name: Deploy Preview
         run: |
-          vercel deploy --prebuilt \
+          vercel deploy --prebuilt --prod=false \
           --token=${{ secrets.VERCEL_TOKEN }} \
           --scope=${{ secrets.VERCEL_SCOPE }}
