@@ -20,20 +20,21 @@ jobs:
       - run: npm install
       
       - name: Install Vercel CLI
-        run: npm install -g vercel@28.16.11  # Pinned to stable version
+        run: npm install -g vercel@latest
         
-      - name: Create environment file
+      - name: Pull Vercel environment
         run: |
-          echo "NEXT_PUBLIC_ENV=development" > .env
-          echo "API_URL=https://dev-api.example.com" >> .env
+          vercel pull --yes --environment=development \
+          --token=${{ secrets.VERCEL_TOKEN }} \
+          --scope=${{ secrets.VERCEL_SCOPE }}
           
-      - name: Build development version
+      - name: Build project
         run: |
           vercel build --prod=false \
           --token=${{ secrets.VERCEL_TOKEN }} \
           --scope=${{ secrets.VERCEL_SCOPE }}
           
-      - name: Deploy preview
+      - name: Create deployment
         run: |
           vercel deploy --prebuilt \
           --token=${{ secrets.VERCEL_TOKEN }} \
