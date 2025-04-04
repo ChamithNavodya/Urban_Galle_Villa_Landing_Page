@@ -69,9 +69,7 @@ const Navbar = () => {
 
       {/* Book Now button */}
       <div className="flex gap-2 items-center">
-        <Link
-          href={"https://www.booking.com/hotel/lk/tranquil-galle.en-gb.html"}
-        >
+        <Link href={"/availability"}>
           <Button className="font-bold">Book Now</Button>
         </Link>
 
