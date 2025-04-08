@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ImageUpload } from "@/components/rooms/ImageUpload";
-import { useRoomForm } from "@/hooks/useRoomForm";
+import { useRoomForm } from "@/hooks/rooms/useRoomForm";
 import { BasicInfoTab } from "@/components/rooms/BasicInfoTab";
 import { DetailsTab } from "@/components/rooms/DetailsTab";
 import { OccupancyTab } from "@/components/rooms/OccupancyTab";
