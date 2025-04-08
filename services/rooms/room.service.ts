@@ -1,8 +1,10 @@
 import apiClient from "../config/axiosConfig";
 import { RoomDropdownResponse } from "../../types/roomDropdowns";
 import {
+  AmenitiesResponse,
   GetAllRoomsResponse,
   RoomFormData,
+  RoomListResponse,
   ViewRoomResponse,
 } from "@/types/room.types";
 
@@ -76,6 +78,27 @@ export const roomService = {
   async deleteRoom(roomId: string): Promise<ViewRoomResponse> {
     const response = await apiClient.post<ViewRoomResponse>(
       `room/delete/${roomId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  },
+
+  async getRoomList(): Promise<RoomListResponse> {
+    const response = await apiClient.get<RoomListResponse>(`room/list`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  },
+
+  async getAmenitiesList(): Promise<AmenitiesResponse> {
+    const response = await apiClient.get<AmenitiesResponse>(
+      `settings/fetch-amenities`,
       {
         headers: {
           "Content-Type": "application/json",

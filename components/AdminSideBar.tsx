@@ -13,6 +13,7 @@ import {
   CreditCard,
   Menu,
   X,
+  Tag,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -27,6 +28,11 @@ const navItems = [
     title: "Rooms",
     href: "/admin/rooms",
     icon: Bed,
+  },
+  {
+    title: "Rate Plans",
+    href: "/admin/rate-plans",
+    icon: Tag,
   },
   {
     title: "Rates & Availability",

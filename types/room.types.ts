@@ -33,19 +33,6 @@ export interface GetAllRoomsResponse {
   message: string;
   data: Room[];
 }
-export interface ViewRoomResponse {
-  error?: {
-    statusCode: number;
-    errors: string[];
-    timestamp: string;
-    path: string;
-    stack: string;
-  };
-  success: boolean;
-  message: string;
-  data: Room;
-}
-
 export interface RoomFormData {
   name: string;
   type: string;
@@ -125,6 +112,36 @@ export type RoomFormTabs = {
   images: boolean;
   pricing: boolean;
 };
+
+export interface RoomListItem {
+  roomId: number;
+  name: string;
+}
+
+export interface RoomListResponse {
+  success: boolean;
+  message: string;
+  data: RoomListItem[];
+}
+
+export interface AmenitiesResponse {
+  success: boolean;
+  message: string;
+  data: Amenity[];
+}
+
+export interface ViewRoomResponse {
+  error?: {
+    statusCode: number;
+    errors: string[];
+    timestamp: string;
+    path: string;
+    stack: string;
+  };
+  success: boolean;
+  message: string;
+  data: Room;
+}
 
 ///////////////// Type casting /////////////////
 export const roomToFormData = (room: Room): RoomFormData => ({
