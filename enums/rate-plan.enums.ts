@@ -28,7 +28,6 @@ export enum PaymentMethod {
 }
 
 export enum RatePlanTypes {
-  All = "All Types",
   Standard = "Standard",
   DateSpecific = "Date Specific",
   DurationBased = "Duration Based",
