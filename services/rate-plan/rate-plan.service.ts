@@ -5,7 +5,7 @@ import {
   RatePlansResponse,
 } from "@/types/rate-plan.types";
 import apiClient from "../config/axiosConfig";
-import { RatePlanStatus } from "@/enums/rate-plan.enums";
+import { RatePlanStatus, RatePlanTypes } from "@/enums/rate-plan.enums";
 
 export const ratePlanService = {
   async addNewRatePlan(
@@ -23,8 +23,23 @@ export const ratePlanService = {
     return response.data;
   },
 
-  async getAllRatePlans(): Promise<RatePlansResponse> {
-    const response = await apiClient.get<RatePlansResponse>("rate-plan/all", {
+  async getAllRatePlans(query: {
+    page?: number;
+    limit?: number;
+    ratePlanType?: RatePlanTypes;
+    ratePlanStatus?: RatePlanStatus;
+    roomIds?: number[];
+  }): Promise<RatePlansResponse> {
+    const params = new URLSearchParams();
+
+    if (query.page) params.append("page", query.page.toString());
+    if (query.limit) params.append("limit", query.limit.toString());
+    if (query.ratePlanType) params.append("ratePlanType", query.ratePlanType);
+    if (query.ratePlanStatus)
+      params.append("ratePlanStatus", query.ratePlanStatus);
+    if (query.roomIds) params.append("roomIds", query.roomIds.join(","));
+
+    const response = await apiClient.post(`rate-plan/all`, query, {
       headers: {
         "Content-Type": "application/json",
       },

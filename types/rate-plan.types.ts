@@ -6,6 +6,7 @@ import {
   StayDurationType,
 } from "@/enums/rate-plan.enums";
 import { DateRange } from "react-day-picker";
+import { PaginationMetadata } from "./common.types";
 
 export interface RatePlanFormData {
   // General Details
@@ -78,6 +79,7 @@ export interface RatePlansResponse {
   message?: string;
   statusCode?: number;
   success?: boolean;
+  meta: PaginationMetadata;
 }
 
 export interface RatePlanResponse {

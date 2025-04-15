@@ -4,4 +4,5 @@ export const NavItems = [
   { label: "Gallery", endPoint: "/gallery" },
   { label: "Contact Us", endPoint: "/contact-us" },
   { label: "Blog", endPoint: "/blog" },
+  { label: "Admin", endPoint: "/admin" },
 ];
